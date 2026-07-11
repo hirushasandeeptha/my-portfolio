@@ -1,3 +1,346 @@
-*{
-    background: rgb(35, 101, 128);
+/* Custom animations and styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Blob animation */
+@keyframes blob {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    33% {
+        transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+}
+
+.animate-blob {
+    animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+    animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+    animation-delay: 4s;
+}
+
+/* Text gradient animation */
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.animate-text {
+    background-size: 200% auto;
+    animation: gradient-shift 3s linear infinite;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0891b2;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #06b6d4;
+}
+
+/* Nav links underline animation */
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, #06b6d4, #0ea5e9);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Project card hover effect */
+.project-card {
+    transition: all 0.3s ease;
+    transform: translateY(0);
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(6, 182, 212, 0.15);
+}
+
+/* Skill card animation */
+.skill-card {
+    transition: all 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(6, 182, 212, 0.1);
+}
+
+/* Counter animation */
+.counter {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Button hover glow */
+button, a.hover\:shadow-lg {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover, a.hover\:shadow-lg:hover {
+    text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+}
+
+/* Glass morphism effect */
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Gradient border effect */
+@keyframes gradient-border {
+    0% {
+        border-image-source: linear-gradient(45deg, #06b6d4, #0ea5e9, #3b82f6, #06b6d4);
+        border-image-position: 0% 0%;
+    }
+    100% {
+        border-image-position: 100% 100%;
+    }
+}
+
+/* Smooth fade in animation for content */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Parallax effect helper */
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Glow effect for elements */
+.glow {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+}
+
+/* Text shimmer effect */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.shimmer {
+    animation: shimmer 2s infinite;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        transparent 100%
+    );
+    background-size: 1000px 100%;
+}
+
+/* Mobile menu animation */
+#mobileMenu {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Loading skeleton animation */
+@keyframes loading {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 1024px) {
+    .text-7xl {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .text-6xl {
+        font-size: 2rem;
+    }
+    
+    .text-5xl {
+        font-size: 1.875rem;
+    }
+}
+
+/* Dark mode (already using dark theme, but ensuring consistency) */
+body {
+    color-scheme: dark;
+    background-color: #000;
+    color: #fff;
+}
+
+/* Link styles */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Code highlighting (if needed for future) */
+code {
+    background-color: rgba(6, 182, 212, 0.1);
+    color: #06b6d4;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+/* Heading styles */
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+}
+
+/* Section padding optimization */
+section {
+    position: relative;
+    z-index: 1;
+}
+
+/* Floating animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse animation for CTAs */
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(6, 182, 212, 0.8);
+    }
+}
+
+.pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Stagger animation for multiple elements */
+.stagger > * {
+    animation: fadeInUp 0.6s ease-out backwards;
+}
+
+.stagger > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger > *:nth-child(6) { animation-delay: 0.6s; }
+
+/* Accessible focus states */
+*:focus-visible {
+    outline: 2px solid #06b6d4;
+    outline-offset: 2px;
+}
+
+/* Improved button states */
+button {
+    cursor: pointer;
+    user-select: none;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Smooth transitions everywhere */
+* {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+}
+
+/* Override transition for animations */
+.animate-blob,
+.animate-text,
+.animate-bounce {
+    transition: none;
 }

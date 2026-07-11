@@ -1,106 +1,336 @@
 <!DOCTYPE html>
-    <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-
-        <title>Hirusha Sandeeptha l portfolio</title>
-
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hirusha Sandeeptha | Full Stack Developer & Creative Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <link rel="stylesheet" href="assets/CSS/styles.css">
 </head>
-
-<body>
-    <script src="assets/JS/main.js"></script>
-    <!-- Include this script tag or install `@tailwindplus/elements` via npm: -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> -->
-<div class="bg-white">
-  <header class="absolute inset-x-0 top-0 z-50">
-    <nav aria-label="Global" class="flex items-center justify-between p-6 lg:px-8">
-      <div class="flex lg:flex-1">
-        <a href="#" class="-m-1.5 p-1.5">
-          <span class="sr-only">Your Company</span>
-          <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="" class="h-8 w-auto" />
-        </a>
-      </div>
-      <div class="flex lg:hidden">
-        <button type="button" command="show-modal" commandfor="mobile-menu" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
-          <span class="sr-only">Open main menu</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6">
-            <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
-      </div>
-      <div class="hidden lg:flex lg:gap-x-12">
-        <a href="#" class="text-sm/6 font-semibold text-gray-900">Product</a>
-        <a href="#" class="text-sm/6 font-semibold text-gray-900">Features</a>
-        <a href="#" class="text-sm/6 font-semibold text-gray-900">Marketplace</a>
-        <a href="#" class="text-sm/6 font-semibold text-gray-900">Company</a>
-      </div>
-      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <a href="#" class="text-sm/6 font-semibold text-gray-900">Log in <span aria-hidden="true">&rarr;</span></a>
-      </div>
-    </nav>
-    <el-dialog>
-      <dialog id="mobile-menu" class="backdrop:bg-transparent lg:hidden">
-        <div tabindex="0" class="fixed inset-0 focus:outline-none">
-          <el-dialog-panel class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-            <div class="flex items-center justify-between">
-              <a href="#" class="-m-1.5 p-1.5">
-                <span class="sr-only">Your Company</span>
-                <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="" class="h-8 w-auto" />
-              </a>
-              <button type="button" command="close" commandfor="mobile-menu" class="-m-2.5 rounded-md p-2.5 text-gray-700">
-                <span class="sr-only">Close menu</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6">
-                  <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+<body class="bg-black text-white overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                HS
+            </div>
+            <div class="hidden md:flex gap-8">
+                <a href="#home" class="nav-link text-gray-300 hover:text-cyan-400 transition">Home</a>
+                <a href="#projects" class="nav-link text-gray-300 hover:text-cyan-400 transition">Projects</a>
+                <a href="#skills" class="nav-link text-gray-300 hover:text-cyan-400 transition">Skills</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-cyan-400 transition">Contact</a>
+            </div>
+            <button class="md:hidden text-cyan-400" id="menuToggle">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
-              </button>
-            </div>
-            <div class="mt-6 flow-root">
-              <div class="-my-6 divide-y divide-gray-500/10">
-                <div class="space-y-2 py-6">
-                  <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Product</a>
-                  <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Features</a>
-                  <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Marketplace</a>
-                  <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Company</a>
-                </div>
-                <div class="py-6">
-                  <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Log in</a>
-                </div>
-              </div>
-            </div>
-          </el-dialog-panel>
+            </button>
         </div>
-      </dialog>
-    </el-dialog>
-  </header>
+    </nav>
 
-  <div class="relative isolate px-6 pt-14 lg:px-8">
-    <div aria-hidden="true" class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
-      <div style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" class="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-288.75"></div>
-    </div>
-    <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-      <div class="hidden sm:mb-8 sm:flex sm:justify-center">
-        <div class="relative rounded-full px-3 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-          Announcing our next round of funding. <a href="#" class="font-semibold text-indigo-600"><span aria-hidden="true" class="absolute inset-0"></span>Read more <span aria-hidden="true">&rarr;</span></a>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden fixed inset-0 bg-black/95 z-40 md:hidden pt-20">
+        <div class="flex flex-col gap-6 p-6">
+            <a href="#home" class="text-xl text-gray-300 hover:text-cyan-400">Home</a>
+            <a href="#projects" class="text-xl text-gray-300 hover:text-cyan-400">Projects</a>
+            <a href="#skills" class="text-xl text-gray-300 hover:text-cyan-400">Skills</a>
+            <a href="#contact" class="text-xl text-gray-300 hover:text-cyan-400">Contact</a>
         </div>
-      </div>
-      <div class="text-center">
-        <h1 class="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">Data to enrich your online business</h1>
-        <p class="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat.</p>
-        <div class="mt-10 flex items-center justify-center gap-x-6">
-          <a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get started</a>
-          <a href="#" class="text-sm/6 font-semibold text-gray-900">Learn more <span aria-hidden="true">→</span></a>
-        </div>
-      </div>
     </div>
-    <div aria-hidden="true" class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
-      <div style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-288.75"></div>
-    </div>
-  </div>
-</div>
 
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden relative">
+        <!-- Animated background elements -->
+        <div class="absolute top-20 left-10 w-72 h-72 bg-cyan-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-blob"></div>
+        <div class="absolute top-40 right-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-1/2 w-72 h-72 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+
+        <div class="max-w-4xl mx-auto text-center z-10">
+            <div class="mb-8">
+                <span class="inline-block px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 rounded-full text-cyan-400 text-sm font-semibold">
+                    Welcome to my digital space
+                </span>
+            </div>
+
+            <h1 class="text-6xl md:text-7xl font-bold mb-6 leading-tight">
+                <span class="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-text">
+                    Hirusha Sandeeptha
+                </span>
+                <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                    Full Stack Developer
+                </span>
+            </h1>
+
+            <p class="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+                Crafting elegant solutions for complex problems. Building intuitive web applications that combine stunning design with robust functionality.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+                <a href="#projects" class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition transform hover:scale-105">
+                    View My Work
+                </a>
+                <a href="#contact" class="px-8 py-4 border-2 border-cyan-500 rounded-lg font-semibold text-cyan-400 hover:bg-cyan-500/10 transition">
+                    Get In Touch
+                </a>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="mt-16 flex justify-center">
+                <div class="animate-bounce">
+                    <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-20">
+            <h2 class="text-5xl font-bold mb-4">
+                <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    Featured Projects
+                </span>
+            </h2>
+            <p class="text-gray-400 text-lg">Showcase of my recent work and creative explorations</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project Cards -->
+            <div class="project-card group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all duration-300">
+                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative p-6 h-full flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg mb-4 flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zm-1-9a1 1 0 10-2 0v1h2V1zm0 13a1 1 0 10-2 0v1h2v-1zM5 8a2 2 0 11-4 0 2 2 0 014 0zm-1-9a1 1 0 10-2 0v1h2V1zm0 13a1 1 0 10-2 0v1h2v-1z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">CV Builder</h3>
+                        <p class="text-gray-400 text-sm mb-4">Professional CV creation tool with dynamic templates and real-time preview</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full">HTML</span>
+                        <span class="px-3 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full">CSS</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all duration-300">
+                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative p-6 h-full flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg mb-4 flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10.5 1.5H5.5A2 2 0 003.5 3.5v13a2 2 0 002 2h9a2 2 0 002-2V8M10 1v7h7"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">PDF Dark Mode Tool</h3>
+                        <p class="text-gray-400 text-sm mb-4">Convert PDFs to dark mode for comfortable reading and eye care</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 bg-yellow-500/20 text-yellow-300 text-xs rounded-full">Python</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all duration-300">
+                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative p-6 h-full flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg mb-4 flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.3A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Gold Price Tracker</h3>
+                        <p class="text-gray-400 text-sm mb-4">Real-time gold price monitoring with historical data analysis</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 bg-green-500/20 text-green-300 text-xs rounded-full">API</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all duration-300">
+                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative p-6 h-full flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg mb-4 flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">PC Craft</h3>
+                        <p class="text-gray-400 text-sm mb-4">Computer hardware showcase and configuration guide</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full">HTML</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all duration-300">
+                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative p-6 h-full flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg mb-4 flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 6a1 1 0 011-1h12a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM3 16a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">LifeVault</h3>
+                        <p class="text-gray-400 text-sm mb-4">Secure personal information vault and memory keeper</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 text-xs rounded-full">Vault</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all duration-300">
+                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative p-6 h-full flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg mb-4 flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Watermark Tool</h3>
+                        <p class="text-gray-400 text-sm mb-4">Add professional watermarks to images with ease</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 bg-red-500/20 text-red-300 text-xs rounded-full">JavaScript</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-16">
+            <a href="https://github.com/hirushasandeeptha?tab=repositories" class="inline-block px-8 py-4 border-2 border-cyan-500 rounded-lg font-semibold text-cyan-400 hover:bg-cyan-500/10 transition">
+                View All Projects on GitHub
+            </a>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-20">
+            <h2 class="text-5xl font-bold mb-4">
+                <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    Skills & Expertise
+                </span>
+            </h2>
+            <p class="text-gray-400 text-lg">Technologies and tools I work with</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="skill-card p-6 rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all">
+                <h3 class="text-xl font-bold mb-4 text-cyan-400">Frontend</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li class="flex items-center"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>HTML/CSS</li>
+                    <li class="flex items-center"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>JavaScript</li>
+                    <li class="flex items-center"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>Tailwind CSS</li>
+                </ul>
+            </div>
+
+            <div class="skill-card p-6 rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all">
+                <h3 class="text-xl font-bold mb-4 text-blue-400">Backend</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Python</li>
+                    <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Node.js</li>
+                    <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>REST APIs</li>
+                </ul>
+            </div>
+
+            <div class="skill-card p-6 rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all">
+                <h3 class="text-xl font-bold mb-4 text-purple-400">Tools</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li class="flex items-center"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>Git</li>
+                    <li class="flex items-center"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>GitHub</li>
+                    <li class="flex items-center"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>VS Code</li>
+                </ul>
+            </div>
+
+            <div class="skill-card p-6 rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all">
+                <h3 class="text-xl font-bold mb-4 text-green-400">Design</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>UI/UX Design</li>
+                    <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>Figma</li>
+                    <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>Animations</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="text-center">
+                <div class="text-5xl font-bold mb-2">
+                    <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent counter" data-target="10">0</span>+
+                </div>
+                <p class="text-gray-400">Projects Completed</p>
+            </div>
+            <div class="text-center">
+                <div class="text-5xl font-bold mb-2">
+                    <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent counter" data-target="6">0</span>+
+                </div>
+                <p class="text-gray-400">Technologies</p>
+            </div>
+            <div class="text-center">
+                <div class="text-5xl font-bold mb-2">
+                    <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">100%</span>
+                </div>
+                <p class="text-gray-400">Dedication</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-5xl font-bold mb-4">
+                <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    Let's Connect
+                </span>
+            </h2>
+            <p class="text-gray-400 text-lg">I'm always interested in hearing about new projects and opportunities</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+            <a href="https://github.com/hirushasandeeptha" class="group p-6 rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all text-center">
+                <div class="mb-4 inline-block p-3 bg-cyan-500/20 rounded-lg group-hover:bg-cyan-500/30 transition">
+                    <svg class="w-6 h-6 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold mb-2">GitHub</h3>
+                <p class="text-gray-400 text-sm">View my projects and contributions</p>
+            </a>
+
+            <a href="mailto:hirushasandeeptha@example.com" class="group p-6 rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all text-center">
+                <div class="mb-4 inline-block p-3 bg-blue-500/20 rounded-lg group-hover:bg-blue-500/30 transition">
+                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold mb-2">Email</h3>
+                <p class="text-gray-400 text-sm">Send me a message</p>
+            </a>
+
+            <a href="https://linkedin.com" class="group p-6 rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all text-center">
+                <div class="mb-4 inline-block p-3 bg-purple-500/20 rounded-lg group-hover:bg-purple-500/30 transition">
+                    <svg class="w-6 h-6 text-purple-400" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.731-2.004 1.438-.103.249-.129.597-.129.946v5.421h-3.554s.047-8.733 0-9.635h3.554v1.364c.429-.663 1.196-1.608 2.907-1.608 2.122 0 3.716 1.388 3.716 4.368v5.511zM5.337 8.855c-1.144 0-1.915-.758-1.915-1.704 0-.951.77-1.704 1.915-1.704 1.144 0 1.915.753 1.915 1.704 0 .946-.771 1.704-1.915 1.704zm1.589 11.597H3.748V9.216h3.178v11.236zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold mb-2">LinkedIn</h3>
+                <p class="text-gray-400 text-sm">Connect with me professionally</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 border-t border-gray-800 mt-24">
+        <div class="max-w-7xl mx-auto text-center text-gray-500">
+            <p>© 2026 Hirusha Sandeeptha. Crafted with creativity and passion.</p>
+        </div>
+    </footer>
+
+    <script src="assets/JS/main.js"></script>
 </body>
 </html>
