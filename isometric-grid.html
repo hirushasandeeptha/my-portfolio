@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Isometric Code Matrix Grid</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0e27;
+            overflow: hidden;
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* Digital Rain Background */
+        .matrix-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .digital-rain {
+            position: absolute;
+            color: rgba(0, 255, 200, 0.1);
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            animation: fall linear infinite;
+            text-shadow: 0 0 10px rgba(0, 255, 200, 0.3);
+        }
+
+        @keyframes fall {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+        }
+
+        /* Main Container */
+        .container-3d {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1200px;
+            z-index: 10;
+        }
+
+        /* Isometric Grid Container */
+        .isometric-grid-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+        }
+
+        .isometric-plane {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            transform-style: preserve-3d;
+            transform: rotateX(65deg) rotateZ(-45deg);
+            animation: float-wave 8s ease-in-out infinite;
+        }
+
+        @keyframes float-wave {
+            0%, 100% {
+                transform: rotateX(65deg) rotateZ(-45deg) translateY(0px);
+            }
+            50% {
+                transform: rotateX(65deg) rotateZ(-45deg) translateY(-15px);
+            }
+        }
+
+        /* Grid Items */
+        .grid-node {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(0, 255, 200, 0.1));
+            border: 2px solid rgba(138, 43, 226, 0.5);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            box-shadow: 
+                0 0 10px rgba(138, 43, 226, 0.3),
+                inset 0 0 10px rgba(0, 255, 200, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: rgba(0, 255, 200, 0.5);
+        }
+
+        .grid-node::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 255, 200, 0.2), transparent);
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .grid-node.active {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.8), rgba(0, 255, 200, 0.6));
+            border-color: rgba(0, 255, 200, 1);
+            transform: translateZ(60px) translateY(-20px);
+            box-shadow: 
+                0 0 30px rgba(0, 255, 200, 0.8),
+                0 20px 40px rgba(138, 43, 226, 0.5),
+                inset 0 0 20px rgba(0, 255, 200, 0.4);
+            color: rgba(0, 255, 200, 1);
+        }
+
+        .grid-node.active::before {
+            opacity: 1;
+            animation: pulse-glow 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(0, 255, 200, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(0, 255, 200, 1);
+            }
+        }
+
+        /* Responsive Scaling */
+        @media (max-width: 768px) {
+            .isometric-plane {
+                width: 400px;
+                height: 400px;
+            }
+
+            .grid-node {
+                width: 32px;
+                height: 32px;
+                font-size: 8px;
+            }
+
+            .grid-node.active {
+                transform: translateZ(40px) translateY(-15px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .isometric-plane {
+                width: 280px;
+                height: 280px;
+            }
+
+            .grid-node {
+                width: 28px;
+                height: 28px;
+                font-size: 7px;
+                border: 1px solid rgba(138, 43, 226, 0.5);
+            }
+
+            .grid-node.active {
+                transform: translateZ(30px) translateY(-10px);
+            }
+        }
+
+        /* Info Panel */
+        .info-panel {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            z-index: 20;
+            color: rgba(0, 255, 200, 0.8);
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 10px rgba(0, 255, 200, 0.5);
+        }
+
+        .info-panel h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: rgba(138, 43, 226, 1);
+            text-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
+        }
+
+        .info-panel p {
+            font-size: 12px;
+            opacity: 0.7;
+            margin: 5px 0;
+        }
+
+        /* Corner Accents */
+        .corner-accent {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(0, 255, 200, 0.4);
+            z-index: 5;
+        }
+
+        .corner-accent.top-left {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-accent.top-right {
+            top: 20px;
+            right: 20px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-accent.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-accent.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* Glow Orb */
+        .glow-orb {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.3), transparent 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+            animation: float-orb 15s ease-in-out infinite;
+        }
+
+        @keyframes float-orb {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(50px, -50px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Digital Rain Background -->
+    <div class="matrix-background" id="matrixBg"></div>
+
+    <!-- Glow Orb -->
+    <div class="glow-orb"></div>
+
+    <!-- Corner Accents -->
+    <div class="corner-accent top-left"></div>
+    <div class="corner-accent top-right"></div>
+    <div class="corner-accent bottom-left"></div>
+    <div class="corner-accent bottom-right"></div>
+
+    <!-- Info Panel -->
+    <div class="info-panel">
+        <h1>MATRIX.GRID</h1>
+        <p>Interactive 3D Code Matrix</p>
+        <p id="activeCount">Active Nodes: 0</p>
+    </div>
+
+    <!-- Main 3D Container -->
+    <div class="container-3d">
+        <div class="isometric-grid-wrapper">
+            <div class="isometric-plane" id="isometricPlane"></div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const CONFIG = {
+            GRID_SIZE: 8,
+            NODE_SIZE: 40,
+            INTERACTION_RANGE: 150,
+            ANIMATION_DURATION: 0.3,
+            MATRIX_CHARS: '01ｦｧｨｩｪｫｬｭｮｯﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾗﾘﾙﾚﾛﾜﾝ',
+            RAIN_COUNT: 15,
+            RAIN_DURATION_MIN: 8,
+            RAIN_DURATION_MAX: 15
+        };
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let activeNodes = new Set();
+
+        // Initialize Digital Rain
+        function initMatrixRain() {
+            const background = document.getElementById('matrixBg');
+            for (let i = 0; i < CONFIG.RAIN_COUNT; i++) {
+                const rain = document.createElement('div');
+                rain.className = 'digital-rain';
+                rain.textContent = generateMatrixString(20);
+                rain.style.left = Math.random() * 100 + '%';
+                rain.style.top = Math.random() * -100 + '%';
+                const duration = CONFIG.RAIN_DURATION_MIN + Math.random() * (CONFIG.RAIN_DURATION_MAX - CONFIG.RAIN_DURATION_MIN);
+                rain.style.animationDuration = duration + 's';
+                rain.style.animationDelay = Math.random() * duration + 's';
+                background.appendChild(rain);
+
+                // Recreate rain when animation ends
+                rain.addEventListener('animationend', () => {
+                    rain.remove();
+                    createNewRain();
+                });
+            }
+        }
+
+        function createNewRain() {
+            const background = document.getElementById('matrixBg');
+            const rain = document.createElement('div');
+            rain.className = 'digital-rain';
+            rain.textContent = generateMatrixString(20);
+            rain.style.left = Math.random() * 100 + '%';
+            rain.style.top = '-50px';
+            const duration = CONFIG.RAIN_DURATION_MIN + Math.random() * (CONFIG.RAIN_DURATION_MAX - CONFIG.RAIN_DURATION_MIN);
+            rain.style.animationDuration = duration + 's';
+            background.appendChild(rain);
+
+            rain.addEventListener('animationend', () => {
+                rain.remove();
+                createNewRain();
+            });
+        }
+
+        function generateMatrixString(length) {
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += CONFIG.MATRIX_CHARS.charAt(Math.floor(Math.random() * CONFIG.MATRIX_CHARS.length));
+            }
+            return result;
+        }
+
+        // Initialize Grid
+        function initGrid() {
+            const plane = document.getElementById('isometricPlane');
+            const planeSize = 600;
+            const gridSpacing = planeSize / (CONFIG.GRID_SIZE - 1);
+
+            for (let x = 0; x < CONFIG.GRID_SIZE; x++) {
+                for (let y = 0; y < CONFIG.GRID_SIZE; y++) {
+                    const node = document.createElement('div');
+                    node.className = 'grid-node';
+                    node.dataset.x = x;
+                    node.dataset.y = y;
+                    node.textContent = Math.floor(Math.random() * 10);
+
+                    const posX = x * gridSpacing - planeSize / 2;
+                    const posY = y * gridSpacing - planeSize / 2;
+
+                    node.style.left = posX + 'px';
+                    node.style.top = posY + 'px';
+                    node.style.transform = `translateZ(${Math.random() * 20}px)`;
+
+                    // Wave animation offset
+                    const waveDelay = (x + y) * 0.05;
+                    node.style.animationDelay = waveDelay + 's';
+
+                    plane.appendChild(node);
+                }
+            }
+        }
+
+        // Get grid center position in viewport
+        function getGridCenterPosition() {
+            const plane = document.getElementById('isometricPlane');
+            const rect = plane.getBoundingClientRect();
+            return {
+                x: rect.left + rect.width / 2,
+                y: rect.top + rect.height / 2
+            };
+        }
+
+        // Update Active Nodes
+        function updateActiveNodes() {
+            const gridCenter = getGridCenterPosition();
+            const nodes = document.querySelectorAll('.grid-node');
+
+            nodes.forEach(node => {
+                const rect = node.getBoundingClientRect();
+                const nodeX = rect.left + rect.width / 2;
+                const nodeY = rect.top + rect.height / 2;
+
+                const distance = Math.sqrt(
+                    Math.pow(mouseX - nodeX, 2) + Math.pow(mouseY - nodeY, 2)
+                );
+
+                if (distance < CONFIG.INTERACTION_RANGE) {
+                    node.classList.add('active');
+                    activeNodes.add(node);
+                } else {
+                    node.classList.remove('active');
+                    activeNodes.delete(node);
+                }
+            });
+
+            document.getElementById('activeCount').textContent = `Active Nodes: ${activeNodes.size}`;
+        }
+
+        // Mouse Move Handler
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Touch Support
+        document.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) {
+                mouseX = e.touches[0].clientX;
+                mouseY = e.touches[0].clientY;
+            }
+        });
+
+        // Animation Loop
+        function animate() {
+            updateActiveNodes();
+            requestAnimationFrame(animate);
+        }
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            // Grid will scale responsively via CSS media queries
+        });
+
+        // Initialize on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            initMatrixRain();
+            initGrid();
+            animate();
+        });
+
+        // Fallback for immediate initialization
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                initMatrixRain();
+                initGrid();
+                animate();
+            });
+        } else {
+            initMatrixRain();
+            initGrid();
+            animate();
+        }
+    </script>
+</body>
+</html>
