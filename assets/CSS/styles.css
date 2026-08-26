@@ -344,3 +344,245 @@ button:active {
 .animate-bounce {
     transition: none;
 }
+
+/* ========================
+   PRELOADER
+   ======================== */
+#preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+
+#preloader .preloader-logo {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #06b6d4, #3b82f6, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+#preloader .preloader-bar-track {
+    width: 200px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#preloader .preloader-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #06b6d4, #3b82f6, #a855f7);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* ========================
+   CUSTOM CURSOR
+   ======================== */
+.custom-cursor {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: #06b6d4;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: difference;
+}
+
+.custom-cursor.hover {
+    width: 40px;
+    height: 40px;
+    background: rgba(6, 182, 212, 0.15);
+    border: 1px solid rgba(6, 182, 212, 0.5);
+}
+
+.cursor-trail {
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(6, 182, 212, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, border-color 0.3s;
+}
+
+.cursor-trail.hover {
+    width: 50px;
+    height: 50px;
+    border-color: rgba(6, 182, 212, 0.2);
+}
+
+@media (hover: none) {
+    .custom-cursor, .cursor-trail { display: none; }
+    * { cursor: auto !important; }
+}
+
+/* ========================
+   MAGNETIC BUTTONS
+   ======================== */
+.magnetic-btn {
+    position: relative;
+    display: inline-block;
+}
+
+.magnetic-btn .btn-content {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+}
+
+/* ========================
+   3D TILT CARDS
+   ======================== */
+.tilt-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.tilt-card .tilt-inner {
+    transform: translateZ(30px);
+}
+
+/* ========================
+   TEXT SPLIT ANIMATION
+   ======================== */
+.split-char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(40px) rotateX(-80deg);
+    transform-origin: bottom center;
+}
+
+.split-word {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.split-word .word-inner {
+    display: inline-block;
+    transform: translateY(100%);
+}
+
+/* ========================
+   SECTION REVEAL CLIP PATH
+   ======================== */
+.section-reveal {
+    clip-path: circle(0% at 50% 50%);
+    transition: clip-path 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section-reveal.revealed {
+    clip-path: circle(100% at 50% 50%);
+}
+
+/* ========================
+   GLOW BORDER ANIMATION
+   ======================== */
+@keyframes glow-rotate {
+    0% { --angle: 0deg; }
+    100% { --angle: 360deg; }
+}
+
+.glow-border {
+    position: relative;
+}
+
+.glow-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: conic-gradient(
+        from var(--angle, 0deg),
+        #06b6d4, #3b82f6, #a855f7, #06b6d4
+    );
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.glow-border:hover::before {
+    opacity: 1;
+    animation: glow-rotate 3s linear infinite;
+}
+
+/* ========================
+   PARALLAX LAYERS
+   ======================== */
+.parallax-layer {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* ========================
+   HERO TEXT ENTRANCE
+   ======================== */
+.hero-badge {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+}
+
+.hero-title-line {
+    opacity: 0;
+    transform: translateY(60px);
+}
+
+.hero-subtitle {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.hero-buttons {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.hero-scroll {
+    opacity: 0;
+}
+
+/* ========================
+   NAVBAR SCROLL EFFECT
+   ======================== */
+nav.scrolled {
+    background: rgba(0, 0, 0, 0.85) !important;
+    backdrop-filter: blur(20px) !important;
+    border-bottom-color: rgba(6, 182, 212, 0.2) !important;
+}
+
+/* ========================
+   SKILL TAG ANIMATION
+   ======================== */
+.skill-card .skill-tag {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+/* ========================
+   SMOOTH SECTION DIVIDER
+   ======================== */
+.section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.3), transparent);
+    margin: 0 auto;
+    width: 0%;
+    transition: width 1s ease;
+}
+
+.section-divider.active {
+    width: 80%;
+}
