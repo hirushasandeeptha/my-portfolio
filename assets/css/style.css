@@ -962,39 +962,52 @@ html.cursor-ready .cursor.is-hidden {
 }
 .float-character {
   position: relative;
-  width: clamp(180px, 22vw, 320px);
-  animation: charFloat 3.6s ease-in-out infinite;
+  width: clamp(200px, 24vw, 340px);
+  animation: charFloat 3.2s ease-in-out infinite;
   transform-origin: bottom center;
-  filter: drop-shadow(0 32px 24px rgba(16,16,16,0.18));
+  /* drop-shadow makes the subject pop off the page */
+  filter: drop-shadow(0 28px 18px rgba(16,16,16,0.22));
 }
 .float-character img {
   width: 100%;
   height: auto;
   display: block;
   object-fit: cover;
-  object-position: 50% 10%;
-  /* clip the bottom slightly for a "standing on ground" look */
-  border-radius: 50% 50% 0 0 / 36% 36% 0 0;
-  aspect-ratio: 1 / 1.4;
+  object-position: 50% 8%;
+  aspect-ratio: 1 / 1.5;
+  /* mix-blend-mode: multiply removes the light/white background
+     so only the dark suit remains — instant "transparent" look */
+  mix-blend-mode: multiply;
+  border-radius: 48% 48% 8px 8px / 32% 32% 8px 8px;
+}
+/* dark theme: use luminosity blend instead */
+[data-theme='dark'] .float-character img {
+  mix-blend-mode: screen;
+  filter: brightness(1.1) contrast(1.08);
 }
 .float-shadow {
-  width: 55%;
-  height: 18px;
-  background: radial-gradient(ellipse at center, rgba(16,16,16,0.28) 0%, transparent 72%);
+  width: 52%;
+  height: 16px;
+  background: radial-gradient(ellipse at center, rgba(16,16,16,0.30) 0%, transparent 70%);
   border-radius: 50%;
-  margin-top: -4px;
-  animation: shadowPulse 3.6s ease-in-out infinite;
+  margin-top: -8px;
+  animation: shadowPulse 3.2s ease-in-out infinite;
   transform-origin: center;
 }
+[data-theme='dark'] .float-shadow {
+  background: radial-gradient(ellipse at center, rgba(200,242,79,0.18) 0%, transparent 70%);
+}
 @keyframes charFloat {
-  0%   { transform: translateY(0px); }
-  50%  { transform: translateY(-18px); }
-  100% { transform: translateY(0px); }
+  0%   { transform: translateY(0px) rotate(0deg); }
+  25%  { transform: translateY(-10px) rotate(0.4deg); }
+  50%  { transform: translateY(-20px) rotate(0deg); }
+  75%  { transform: translateY(-10px) rotate(-0.4deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
 }
 @keyframes shadowPulse {
-  0%   { transform: scaleX(1);    opacity: 0.8; }
-  50%  { transform: scaleX(0.72); opacity: 0.4; }
-  100% { transform: scaleX(1);    opacity: 0.8; }
+  0%   { transform: scaleX(1);    opacity: 0.75; }
+  50%  { transform: scaleX(0.65); opacity: 0.30; }
+  100% { transform: scaleX(1);    opacity: 0.75; }
 }
 .portrait-card::after {
   content: '';
