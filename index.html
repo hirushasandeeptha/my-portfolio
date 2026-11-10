@@ -1,371 +1,844 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hirusha Sandeeptha | Full Stack Developer & Creative Builder</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link rel="stylesheet" href="assets/CSS/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hirusha Sandeeptha — Software Engineer &amp; Solutions Builder</title>
+  <meta name="description" content="Hirusha Sandeeptha is a software engineer and solutions builder from Colombo, Sri Lanka — designing and shipping fast, thoughtful web products, interfaces and APIs.">
+  <meta name="author" content="Hirusha Sandeeptha">
+  <meta name="theme-color" content="#F0EDE5" id="themeColor">
+  <link rel="canonical" href="https://hirushasandeeptha.github.io/my-portfolio/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hirushasandeeptha.github.io/my-portfolio/">
+  <meta property="og:title" content="Hirusha Sandeeptha — Software Engineer &amp; Solutions Builder">
+  <meta property="og:description" content="Complete software products, built with care: clean interfaces, solid APIs, and the details that make them feel effortless.">
+  <meta property="og:image" content="https://hirushasandeeptha.github.io/my-portfolio/assets/img/hirusha-portrait.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preload" href="assets/fonts/space-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try {
+        var t = localStorage.getItem('hs-theme');
+        if (t === 'dark') d.setAttribute('data-theme', 'dark');
+      } catch (e) {}
+    })();
+  </script>
+  <noscript>
+    <style>
+      #preloader { display: none !important; }
+      .menu-btn { display: none !important; }
+      .theme-toggle { display: none !important; }
+      @media (max-width: 1023px) {
+        .nav-links {
+          position: fixed;
+          top: 58px;
+          left: 0;
+          width: 100%;
+          display: flex !important;
+          justify-content: center;
+          gap: 18px;
+          padding: 10px var(--gutter);
+          background: var(--paper);
+          border-bottom: 1px solid var(--line);
+          z-index: 400;
+        }
+        .nav-tools .theme-toggle { display: none; }
+      }
+    </style>
+  </noscript>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Hirusha Sandeeptha",
+      "jobTitle": "Software Engineer",
+      "email": "mailto:hirushasandeeptha2006@gmail.com",
+      "url": "https://hirushasandeeptha.github.io/my-portfolio",
+      "address": { "@type": "PostalAddress", "addressLocality": "Colombo", "addressCountry": "LK" },
+      "sameAs": [
+        "https://github.com/hirushasandeeptha",
+        "https://www.linkedin.com/in/hirushasandeeptha/"
+      ]
+    }
+  </script>
 </head>
-<body class="bg-black text-white overflow-x-hidden">
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="preloader-logo">HS</div>
-        <div class="preloader-bar-track">
-            <div class="preloader-bar" id="preloaderBar"></div>
-        </div>
+<body>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"><span class="cursor-label" id="cursorLabel">View</span></div>
+  </div>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-top">
+      <span class="label">Hirusha Sandeeptha</span>
+      <span class="label">Portfolio / 2026</span>
     </div>
+    <div class="preloader-center">
+      <div class="preloader-mark">HS<sup>®</sup></div>
+      <div class="preloader-bar"><span id="preloaderBar"></span></div>
+      <div class="preloader-count"><span id="preloaderCount">00</span><small>%</small></div>
+    </div>
+    <div class="preloader-bottom">
+      <span class="label">Loading selected work</span>
+      <span class="label">Colombo, LK</span>
+    </div>
+  </div>
 
-    <!-- Custom Cursor -->
-    <div class="custom-cursor" id="customCursor"></div>
-    <div class="cursor-trail" id="cursorTrail"></div>
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <a class="brand" href="#top" aria-label="Hirusha Sandeeptha — back to top">HS<sup>®</sup></a>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-md border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="https://github.com/hirushasandeeptha" class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent hover:opacity-80 transition">
-                HS
-            </a>
-            <div class="hidden md:flex gap-8">
-                <a href="#home" class="nav-link text-gray-300 hover:text-cyan-400 transition">Home</a>
-                <a href="#projects" class="nav-link text-gray-300 hover:text-cyan-400 transition">Projects</a>
-                <a href="#skills" class="nav-link text-gray-300 hover:text-cyan-400 transition">Skills</a>
-                <a href="#contact" class="nav-link text-gray-300 hover:text-cyan-400 transition">Contact</a>
-            </div>
-            <button class="md:hidden text-cyan-400" id="menuToggle">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-        </div>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#work">Work<sup>06</sup></a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden fixed inset-0 bg-black/95 z-40 md:hidden pt-20">
-        <div class="flex flex-col gap-6 p-6">
-            <a href="#home" class="text-xl text-gray-300 hover:text-cyan-400">Home</a>
-            <a href="#projects" class="text-xl text-gray-300 hover:text-cyan-400">Projects</a>
-            <a href="#skills" class="text-xl text-gray-300 hover:text-cyan-400">Skills</a>
-            <a href="#contact" class="text-xl text-gray-300 hover:text-cyan-400">Contact</a>
-        </div>
+    <div class="nav-tools">
+      <span class="nav-status"><i></i> Available for work</span>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"></path>
+        </svg>
+      </button>
+      <a href="#contact" class="btn btn-sm">Let’s talk</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="bars" aria-hidden="true"><i></i><i></i></span>
+        <span id="menuBtnLabel">Menu</span>
+      </button>
     </div>
+  </header>
 
-    <!-- Hero Section with 3D Animation -->
-    <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden relative">
-        <!-- 3D Canvas -->
-        <canvas id="three-canvas" class="absolute inset-0 w-full h-full -z-10"></canvas>
-        
-        <!-- Animated background elements -->
-        <div class="absolute top-20 left-10 w-72 h-72 bg-cyan-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-blob"></div>
-        <div class="absolute top-40 right-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div class="absolute -bottom-8 left-1/2 w-72 h-72 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav class="mobile-nav" aria-label="Mobile">
+      <a href="#about"><span>01</span>About<em aria-hidden="true">↗</em></a>
+      <a href="#work"><span>02</span>Work<em aria-hidden="true">↗</em></a>
+      <a href="#services"><span>03</span>Services<em aria-hidden="true">↗</em></a>
+      <a href="#toolkit"><span>04</span>Toolkit<em aria-hidden="true">↗</em></a>
+      <a href="#contact"><span>05</span>Contact<em aria-hidden="true">↗</em></a>
+    </nav>
+    <div class="mobile-menu-foot">
+      <a href="mailto:hirushasandeeptha2006@gmail.com">hirushasandeeptha2006@gmail.com</a>
+      <a href="https://github.com/hirushasandeeptha" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/hirushasandeeptha/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+      <span class="label">Colombo — <span data-clock>--:--</span></span>
+    </div>
+  </div>
 
-        <div class="max-w-4xl mx-auto text-center z-10">
-            <div class="mb-8 hero-badge">
-                <span class="inline-block px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 rounded-full text-cyan-400 text-sm font-semibold">
-                    Welcome to my digital space
-                </span>
-            </div>
+  <main id="main" tabindex="-1">
 
-            <h1 class="text-6xl md:text-7xl font-bold mb-6 leading-tight">
-                <span class="hero-title-line block">
-                    <span class="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-text" id="heroName">
-                        Hirusha Sandeeptha
-                    </span>
-                </span>
-                <br>
-                <span class="hero-title-line block">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400" id="heroTitle">
-                        Full Stack Developer
-                    </span>
-                </span>
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-grid"></div>
+        <div class="hero-spot" id="heroSpot"></div>
+        <div class="hero-ghost">HS</div>
+      </div>
+
+      <div class="container hero-inner">
+        <div class="hero-top">
+          <span class="label">(Portfolio — 2026)</span>
+          <span class="label">Colombo, Sri Lanka <span class="time" data-clock="short">--:--</span></span>
+        </div>
+
+        <div class="hero-main">
+          <div class="hero-copy">
+            <p class="hero-eyebrow"><span class="dot"></span> Software engineer &amp; solutions builder</p>
+
+            <h1 class="hero-title" aria-label="Hirusha Sandeeptha">
+              <span class="line"><span class="line-inner" data-split="chars">Hirusha</span></span>
+              <span class="line line-serif"><span class="line-inner" data-split="chars">Sandeeptha</span><span class="reg" aria-hidden="true">®</span></span>
             </h1>
 
-            <p class="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed hero-subtitle" id="heroSubtitle">
-                Crafting elegant solutions for complex problems. Building intuitive web applications that combine stunning design with robust functionality.
+            <p class="hero-sub">I design and build <em>complete</em> software products — clean interfaces, solid APIs, and the details that make them feel effortless.</p>
+
+            <div class="hero-actions">
+              <a href="#work" class="btn btn-primary" data-magnetic>
+                Selected work
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+              </a>
+              <a href="mailto:hirushasandeeptha2006@gmail.com" class="btn btn-ghost" data-magnetic>
+                Start a project
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-portrait">
+            <div class="portrait-stack">
+              <div class="portrait-backdrop" aria-hidden="true"></div>
+              <div class="portrait-card" data-tilt>
+                <div class="portrait-media">
+                  <img src="assets/img/hirusha-portrait.jpg" alt="Hirusha Ranasinghe, software engineer, smiling in a black suit" width="800" height="800" fetchpriority="high">
+                </div>
+                <span class="portrait-tag">Hirusha — 2026</span>
+              </div>
+              <div class="portrait-badge" aria-hidden="true">
+                <svg class="ring-text" viewBox="0 0 200 200">
+                  <defs>
+                    <path id="badgeCircle" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"></path>
+                  </defs>
+                  <text textLength="450" lengthAdjust="spacingAndGlyphs"><textPath href="#badgeCircle">OPEN FOR WORK • LET'S BUILD • OPEN FOR WORK • LET'S BUILD • </textPath></text>
+                </svg>
+                <span class="star">✳</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-foot">
+          <a href="#about" class="scroll-cue">
+            <span class="cue-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M6 14l6 6 6-6"/></svg></span>
+            Scroll to explore
+          </a>
+          <div class="hero-facts">
+            <div><strong>10+</strong><span>Projects shipped</span></div>
+            <div><strong>6+</strong><span>Core technologies</span></div>
+            <div><strong>∞</strong><span>Curiosity</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+          <div class="ticker-group">
+            <span>Available for select projects</span><i>✳</i>
+            <span>Web applications</span><i>✳</i>
+            <span>Interface &amp; motion</span><i>✳</i>
+            <span>APIs &amp; automation</span><i>✳</i>
+            <span>Performance &amp; polish</span><i>✳</i>
+            <span>Colombo → Worldwide</span><i>✳</i>
+          </div>
+          <div class="ticker-group">
+            <span>Available for select projects</span><i>✳</i>
+            <span>Web applications</span><i>✳</i>
+            <span>Interface &amp; motion</span><i>✳</i>
+            <span>APIs &amp; automation</span><i>✳</i>
+            <span>Performance &amp; polish</span><i>✳</i>
+            <span>Colombo → Worldwide</span><i>✳</i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="label">(01) — About</span>
+          <span class="label">06°55′N 79°51′E — Colombo</span>
+        </div>
+
+        <div class="about-grid">
+          <aside class="about-aside" data-reveal>
+            <div class="about-marker" aria-hidden="true">✳</div>
+            <p>19 years old.<br>Colombo-based.<br>Builder by habit.</p>
+          </aside>
+
+          <div class="about-body">
+            <h2 class="statement" id="statement">
+              Good software isn’t just code that runs. It’s a problem <em>understood</em>, a flow simplified, a detail that makes someone say: <em>this just works.</em>
+            </h2>
+
+                    <div class="about-text">
+              <p data-reveal>
+                I'm Hirusha - a software engineer from Colombo, Sri Lanka. I write code, design interfaces, and ship full products that actually work. Currently working as a developer at <a href="https://github.com/KDJ-Lanka" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px"><strong>KDJ Lanka (Pvt) Ltd</strong></a>, helping build real digital products for real people.
+              </p>
+              <p data-reveal>
+                I started coding by solving my own problems - a CV tool, a PDF converter, a gold price tracker. That's still how I think: <strong>find what's annoying, remove it</strong>, then ship something that feels effortless. I enjoy the gap between engineering and design - where clean code meets something people actually enjoy using.
+              </p>
+            </div>
+
+            <div class="about-stats" data-reveal>
+              <div class="stat">
+                <span class="stat-value"><span data-count="10">0</span><sup>+</sup></span>
+                <span class="stat-label">Projects shipped</span>
+              </div>
+              <div class="stat">
+                <span class="stat-value"><span data-count="6">0</span><sup>+</sup></span>
+                <span class="stat-label">Core technologies</span>
+              </div>
+              <div class="stat">
+                <span class="stat-value"><span data-count="100">0</span><sup>%</sup></span>
+                <span class="stat-label">Attention to detail</span>
+              </div>
+            </div>
+
+            <p class="about-org" data-reveal>
+              Also contributing to <a href="https://github.com/KDJ-Lanka" target="_blank" rel="noopener noreferrer"><strong>KDJ Lanka</strong></a> as a developer — building <em>CapturePro</em> and other digital products out of Sri Lanka.
             </p>
-
-            <div class="flex flex-col sm:flex-row gap-6 justify-center mb-12 hero-buttons">
-                <a href="#projects" class="magnetic-btn px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition transform hover:scale-105">
-                    <span class="btn-content">View My Work</span>
-                </a>
-                <a href="https://github.com/hirushasandeeptha" target="_blank" rel="noopener noreferrer" class="magnetic-btn px-8 py-4 border-2 border-cyan-500 rounded-lg font-semibold text-cyan-400 hover:bg-cyan-500/10 transition flex items-center justify-center gap-2">
-                    <span class="btn-content flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                        Visit GitHub Profile
-                    </span>
-                </a>
-            </div>
-
-            <!-- Scroll indicator -->
-            <div class="mt-16 flex justify-center hero-scroll">
-                <div class="animate-bounce">
-                    <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                    </svg>
-                </div>
-            </div>
+            <p class="signature" data-reveal>Hirusha Sandeeptha</p>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Section Divider -->
-    <div class="section-divider max-w-7xl mx-auto"></div>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="text-center mb-20">
-            <h2 class="text-5xl font-bold mb-4">
-                <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                    Featured Projects
-                </span>
-            </h2>
-            <p class="text-gray-400 text-lg">Showcase of my recent work and creative explorations</p>
+    <!-- Work -->
+    <section class="work" id="work">
+      <div class="work-pin">
+        <div class="container work-head">
+          <div>
+            <span class="label">(02) — Selected work</span>
+            <h2>Things I built <em>properly</em>.</h2>
+          </div>
+          <div class="work-head-meta">
+            <span>06 Projects</span>
+            <span>2024 — 2026</span>
+          </div>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Project Cards -->
-            <div class="project-card tilt-card glow-border group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20">
-                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="relative p-6 h-full flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg mb-4 flex items-center justify-center">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zm-1-9a1 1 0 10-2 0v7a1 1 0 001 1h1a1 1 0 001-1V0z"/></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">CV Builder</h3>
-                        <p class="text-gray-400 text-sm mb-4">Professional CV creation tool with dynamic templates and real-time preview</p>
-                    </div>
-                    <div class="flex gap-2">
-                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full">HTML</span>
-                        <span class="px-3 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full">CSS</span>
-                    </div>
-                </div>
-            </div>
+        <div class="work-viewport" id="workViewport">
+          <div class="work-track" id="workTrack">
 
-            <div class="project-card tilt-card glow-border group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20">
-                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="relative p-6 h-full flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg mb-4 flex items-center justify-center">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10.5 1.5H5.5A2 2 0 003.5 3.5v13a2 2 0 002 2h9a2 2 0 002-2V8M10 1v7h7"/></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">PDF Dark Mode Tool</h3>
-                        <p class="text-gray-400 text-sm mb-4">Convert PDFs to dark mode for comfortable reading and eye care</p>
-                    </div>
-                    <div class="flex gap-2">
-                        <span class="px-3 py-1 bg-yellow-500/20 text-yellow-300 text-xs rounded-full">Python</span>
-                    </div>
-                </div>
-            </div>
+            <!-- 01 — CV Builder -->
+            <article class="work-card" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open CV Builder project details" data-project="cv-builder" data-cursor="view">
+              <div class="poster">
+                <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <rect width="400" height="500" fill="#12120F"/>
+                  <g stroke="#26261F" stroke-width="1" opacity="0.8">
+                    <path d="M0 100h400M0 200h400M0 300h400M0 400h400M100 0v500M200 0v500M300 0v500"/>
+                  </g>
+                  <text x="26" y="52" fill="#C8F24F" font-family="'JetBrains Mono', monospace" font-size="10" letter-spacing="2">01 / RESUME</text>
+                  <text x="374" y="52" fill="#6F6B5F" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10">2025</text>
 
-            <div class="project-card tilt-card glow-border group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20">
-                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="relative p-6 h-full flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg mb-4 flex items-center justify-center">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.3A4.5 4.5 0 1113.5 13H11V9.413l1.293-1.293a1 1 0 001.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 001.414-1.414L9 9.414V13H5.5z"/></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Gold Price Tracker</h3>
-                        <p class="text-gray-400 text-sm mb-4">Real-time gold price monitoring with historical data analysis</p>
-                    </div>
-                    <div class="flex gap-2">
-                        <span class="px-3 py-1 bg-green-500/20 text-green-300 text-xs rounded-full">API</span>
-                    </div>
-                </div>
-            </div>
+                  <g transform="translate(204 272)">
+                    <g class="sheet sheet-b">
+                      <rect x="-98" y="-132" width="196" height="264" rx="5" fill="#0A0A08" opacity="0.55"/>
+                      <rect x="-100" y="-134" width="196" height="264" rx="5" fill="#D9D4C7"/>
+                    </g>
+                  </g>
+                  <g transform="translate(200 282)">
+                    <g class="sheet sheet-a">
+                      <rect x="-100" y="-134" width="200" height="268" rx="5" fill="#0A0A08" opacity="0.5"/>
+                      <rect x="-102" y="-136" width="200" height="268" rx="5" fill="#E9E5D9"/>
+                      <rect x="-82" y="-112" width="160" height="32" rx="3" fill="#C8F24F"/>
+                      <circle cx="-58" cy="-52" r="20" fill="#12120F"/>
+                      <rect x="-28" y="-64" width="86" height="7" rx="3.5" fill="#12120F"/>
+                      <rect x="-28" y="-50" width="60" height="4" rx="2" fill="#B7B2A4"/>
+                      <rect x="-28" y="-41" width="72" height="4" rx="2" fill="#B7B2A4"/>
+                      <rect x="-82" y="-12" width="48" height="4" rx="2" fill="#12120F"/>
+                      <rect x="-82" y="2" width="160" height="3" rx="1.5" fill="#BDB8AA"/>
+                      <rect x="-82" y="14" width="146" height="3" rx="1.5" fill="#BDB8AA"/>
+                      <rect x="-82" y="26" width="154" height="3" rx="1.5" fill="#BDB8AA"/>
+                      <rect x="-82" y="54" width="40" height="4" rx="2" fill="#12120F"/>
+                      <rect x="-82" y="68" width="72" height="16" rx="3" fill="#12120F"/>
+                      <rect x="-2" y="68" width="72" height="16" rx="3" fill="#D5D0C2"/>
+                      <rect x="-82" y="98" width="154" height="3" rx="1.5" fill="#BDB8AA"/>
+                      <rect x="-82" y="110" width="120" height="3" rx="1.5" fill="#BDB8AA"/>
+                    </g>
+                  </g>
 
-            <div class="project-card tilt-card glow-border group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20">
-                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="relative p-6 h-full flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg mb-4 flex items-center justify-center">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">PC Craft</h3>
-                        <p class="text-gray-400 text-sm mb-4">Computer hardware showcase and configuration guide</p>
-                    </div>
-                    <div class="flex gap-2">
-                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full">HTML</span>
-                    </div>
+                  <text x="26" y="464" fill="#F2EFE6" font-family="'Space Grotesk', sans-serif" font-size="44" font-weight="500" letter-spacing="-2">CV</text>
+                  <text x="374" y="462" fill="#C8F24F" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="9" letter-spacing="1.4">BUILD / PREVIEW</text>
+                </svg>
+                <span class="poster-open">View project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+              </div>
+              <div class="work-meta">
+                <div>
+                  <h3 class="work-title">CV Builder</h3>
+                  <div class="work-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
                 </div>
-            </div>
+                <span class="work-year">2025</span>
+              </div>
+            </article>
 
-            <div class="project-card tilt-card glow-border group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20">
-                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="relative p-6 h-full flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg mb-4 flex items-center justify-center">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 6a1 1 0 01 1 1h12a1 1 0 01-1 1H4a1 1 0 01-1-1v-2zm0 6a1 1 0 011 1h12a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z"/></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">LifeVault</h3>
-                        <p class="text-gray-400 text-sm mb-4">Secure personal information vault and memory keeper</p>
-                    </div>
-                    <div class="flex gap-2">
-                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 text-xs rounded-full">Vault</span>
-                    </div>
-                </div>
-            </div>
+            <!-- 02 — PDF Dark Mode -->
+            <article class="work-card" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open PDF Dark Mode project details" data-project="pdf-dark" data-cursor="view">
+              <div class="poster">
+                <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <rect width="400" height="500" fill="#12120F"/>
+                  <path d="M0 0H400L0 500Z" fill="#E9E5D9"/>
+                  <g opacity="0.28" stroke="#12120F" stroke-width="1">
+                    <path d="M24 64h150M24 84h118M24 104h134M24 124h76"/>
+                  </g>
+                  <text x="26" y="44" fill="#12120F" font-family="'JetBrains Mono', monospace" font-size="10" letter-spacing="2">02 / TOOL</text>
 
-            <div class="project-card tilt-card glow-border group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20">
-                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="relative p-6 h-full flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg mb-4 flex items-center justify-center">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4z"/></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Watermark Tool</h3>
-                        <p class="text-gray-400 text-sm mb-4">Add professional watermarks to images with ease</p>
-                    </div>
-                    <div class="flex gap-2">
-                        <span class="px-3 py-1 bg-red-500/20 text-red-300 text-xs rounded-full">JavaScript</span>
-                    </div>
+                  <circle cx="258" cy="214" r="92" fill="#C8F24F"/>
+                  <path d="M258 122a92 92 0 0 1 0 184Z" fill="#12120F"/>
+                  <circle cx="258" cy="214" r="120" fill="none" stroke="#F2EFE6" stroke-width="1" opacity="0.35"/>
+                  <circle cx="258" cy="214" r="148" fill="none" stroke="#F2EFE6" stroke-width="1" opacity="0.18"/>
+
+                  <g fill="#F2EFE6" opacity="0.5">
+                    <circle cx="52" cy="330" r="2"/><circle cx="72" cy="330" r="2"/><circle cx="92" cy="330" r="2"/>
+                    <circle cx="52" cy="350" r="2"/><circle cx="72" cy="350" r="2"/><circle cx="92" cy="350" r="2"/>
+                  </g>
+
+                  <text x="196" y="424" fill="#F2EFE6" font-family="'Space Grotesk', sans-serif" font-size="64" font-weight="500" letter-spacing="-3">PDF</text>
+                  <text x="196" y="450" fill="#C8F24F" font-family="'JetBrains Mono', monospace" font-size="9" letter-spacing="2">DARK MODE / BATCH</text>
+                  <text x="374" y="462" fill="#6F6B5F" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="9">py</text>
+                </svg>
+                <span class="poster-open">View project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+              </div>
+              <div class="work-meta">
+                <div>
+                  <h3 class="work-title">PDF Dark Mode</h3>
+                  <div class="work-tags"><span>Python</span><span>Automation</span></div>
                 </div>
-            </div>
+                <span class="work-year">2025</span>
+              </div>
+            </article>
+
+            <!-- 03 — Gold Price Tracker -->
+            <article class="work-card" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open Gold Price Tracker project details" data-project="gold-tracker" data-cursor="view">
+              <div class="poster">
+                <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <rect width="400" height="500" fill="#12120F"/>
+                  <g stroke="#26261F" stroke-width="1">
+                    <path d="M0 120h400M0 200h400M0 280h400M0 360h400M80 0v500M180 0v500M280 0v500"/>
+                  </g>
+                  <text x="26" y="44" fill="#C8F24F" font-family="'JetBrains Mono', monospace" font-size="10" letter-spacing="2">03 / DATA</text>
+                  <text x="374" y="44" fill="#6F6B5F" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10">XAU / USD</text>
+
+                  <text x="26" y="108" fill="#F2EFE6" font-family="'Space Grotesk', sans-serif" font-size="48" font-weight="500" letter-spacing="-2">2,341.50</text>
+                  <text x="26" y="134" fill="#C8F24F" font-family="'JetBrains Mono', monospace" font-size="11" letter-spacing="1">+1.84% TODAY</text>
+
+                  <path d="M0 390 L52 372 L104 380 L156 330 L208 342 L260 286 L312 300 L360 248 L400 258 V500 H0 Z" fill="#E3B341" opacity="0.14"/>
+                  <path d="M0 390 L52 372 L104 380 L156 330 L208 342 L260 286 L312 300 L360 248 L400 258" fill="none" stroke="#E3B341" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+                  <circle cx="360" cy="248" r="5" fill="#C8F24F"/>
+                  <circle cx="360" cy="248" r="11" fill="none" stroke="#C8F24F" opacity="0.4"/>
+
+                  <text x="26" y="438" fill="#8A857A" font-family="'JetBrains Mono', monospace" font-size="8.5" letter-spacing="1.5">LIVE RATE · HISTORY · ALERTS</text>
+                  <text x="374" y="462" fill="#C8F24F" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="9">LIVE ●</text>
+                </svg>
+                <span class="poster-open">View project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+              </div>
+              <div class="work-meta">
+                <div>
+                  <h3 class="work-title">Gold Price Tracker</h3>
+                  <div class="work-tags"><span>API</span><span>JavaScript</span><span>Charts</span></div>
+                </div>
+                <span class="work-year">2025</span>
+              </div>
+            </article>
+
+            <!-- 04 — PC Craft -->
+            <article class="work-card" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open PC Craft project details" data-project="pc-craft" data-cursor="view">
+              <div class="poster">
+                <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <rect width="400" height="500" fill="#E9E5D9"/>
+                  <g stroke="#12120F" stroke-width="1" opacity="0.14">
+                    <path d="M0 100h400M0 200h400M0 300h400M0 400h400M100 0v500M200 0v500M300 0v500"/>
+                  </g>
+                  <text x="26" y="44" fill="#12120F" font-family="'JetBrains Mono', monospace" font-size="10" letter-spacing="2">04 / EXPERIENCE</text>
+                  <text x="374" y="44" fill="#12120F" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10" opacity="0.5">2024</text>
+
+                  <text x="24" y="140" fill="#12120F" font-family="'Space Grotesk', sans-serif" font-size="86" font-weight="500" letter-spacing="-6">PC</text>
+                  <text x="26" y="168" fill="#3B5BFF" font-family="'JetBrains Mono', monospace" font-size="10" letter-spacing="2">CRAFT / YOUR RIG</text>
+
+                  <g transform="translate(0 14)">
+                    <path d="M200 156 L320 225 L200 294 L80 225 Z" fill="#3B5BFF"/>
+                    <path d="M80 225 L200 294 V434 L80 365 Z" fill="#12120F"/>
+                    <path d="M200 294 L320 225 V365 L200 434 Z" fill="#2637B8"/>
+                    <circle cx="283" cy="322" r="10" fill="#C8F24F"/>
+                    <path d="M262 348h42M262 358h28" stroke="#C8F24F" stroke-width="2" opacity="0.6"/>
+                    <path d="M200 294 L200 434" stroke="#E9E5D9" stroke-width="1" opacity="0.18"/>
+                  </g>
+
+                  <text x="26" y="468" fill="#12120F" font-family="'JetBrains Mono', monospace" font-size="8.5" letter-spacing="1.5">COMPONENTS · BUILDS · GUIDES</text>
+                </svg>
+                <span class="poster-open">View project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+              </div>
+              <div class="work-meta">
+                <div>
+                  <h3 class="work-title">PC Craft</h3>
+                  <div class="work-tags"><span>HTML</span><span>CSS</span><span>UI</span></div>
+                </div>
+                <span class="work-year">2024</span>
+              </div>
+            </article>
+
+            <!-- 05 — LifeVault -->
+            <article class="work-card" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open LifeVault project details" data-project="lifevault" data-cursor="view">
+              <div class="poster">
+                <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <rect width="400" height="500" fill="#FF5C35"/>
+                  <text x="26" y="44" fill="#12120F" font-family="'JetBrains Mono', monospace" font-size="10" letter-spacing="2">05 / PRODUCT</text>
+                  <text x="374" y="44" fill="#12120F" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10" opacity="0.55">2024</text>
+
+                  <circle cx="200" cy="252" r="148" fill="#12120F"/>
+                  <circle cx="200" cy="252" r="124" fill="none" stroke="#FF5C35" stroke-width="1" opacity="0.35"/>
+                  <circle cx="200" cy="252" r="96" fill="none" stroke="#FF5C35" stroke-width="1" opacity="0.35"/>
+                  <g stroke="#FF5C35" stroke-width="1" opacity="0.28">
+                    <path d="M200 104v40M200 360v40M52 252h40M308 252h40M95 147l28 28M277 329l28 28M305 147l-28 28M123 329l-28 28"/>
+                  </g>
+                  <circle cx="200" cy="252" r="55" fill="none" stroke="#C8F24F" stroke-width="9"/>
+                  <circle cx="200" cy="252" r="15" fill="#C8F24F"/>
+                  <g stroke="#C8F24F" stroke-width="8" stroke-linecap="round">
+                    <path d="M200 197v22M200 285v22M145 252h22M233 252h22"/>
+                  </g>
+
+                  <text x="26" y="452" fill="#12120F" font-family="'Space Grotesk', sans-serif" font-size="42" font-weight="500" letter-spacing="-2">VAULT</text>
+                  <text x="26" y="474" fill="#12120F" font-family="'JetBrains Mono', monospace" font-size="8.5" letter-spacing="1.4" opacity="0.7">PRIVATE BY DESIGN</text>
+                </svg>
+                <span class="poster-open">View project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+              </div>
+              <div class="work-meta">
+                <div>
+                  <h3 class="work-title">LifeVault</h3>
+                  <div class="work-tags"><span>UI/UX</span><span>JavaScript</span></div>
+                </div>
+                <span class="work-year">2024</span>
+              </div>
+            </article>
+
+            <!-- 06 — Watermark Studio -->
+            <article class="work-card" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open Watermark Studio project details" data-project="watermark" data-cursor="view">
+              <div class="poster">
+                <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <rect width="400" height="500" fill="#5B4BE0"/>
+                  <g stroke="#F2EFE6" stroke-width="1" opacity="0.14">
+                    <path d="M0 60 L400 460M0 160 L400 560M-100 0 L300 500M60 0 L460 500"/>
+                  </g>
+                  <text x="26" y="44" fill="#C8F24F" font-family="'JetBrains Mono', monospace" font-size="10" letter-spacing="2">06 / TOOL</text>
+                  <text x="374" y="44" fill="#F2EFE6" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10" opacity="0.55">2024</text>
+
+                  <g fill="none" stroke="#C8F24F" stroke-width="1.5">
+                    <circle cx="160" cy="222" r="104"/>
+                    <circle cx="240" cy="222" r="104"/>
+                    <circle cx="200" cy="296" r="104"/>
+                  </g>
+                  <text x="200" y="330" fill="#F2EFE6" font-family="'Instrument Serif', serif" font-size="190" text-anchor="middle" opacity="0.92">©</text>
+
+                  <g transform="rotate(-8 200 430)">
+                    <rect x="96" y="404" width="208" height="34" rx="4" fill="#C8F24F"/>
+                    <text x="200" y="426" fill="#12120F" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" letter-spacing="2">WATERMARK / SAMPLE</text>
+                  </g>
+                  <text x="26" y="474" fill="#F2EFE6" font-family="'JetBrains Mono', monospace" font-size="8.5" letter-spacing="1.4" opacity="0.7">BATCH · POSITION · OPACITY</text>
+                </svg>
+                <span class="poster-open">View project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+              </div>
+              <div class="work-meta">
+                <div>
+                  <h3 class="work-title">Watermark Studio</h3>
+                  <div class="work-tags"><span>Canvas</span><span>JavaScript</span></div>
+                </div>
+                <span class="work-year">2024</span>
+              </div>
+            </article>
+
+          </div>
         </div>
 
-        <div class="text-center mt-16">
-            <a href="https://github.com/hirushasandeeptha?tab=repositories" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-4 border-2 border-cyan-500 rounded-lg font-semibold text-cyan-400 hover:bg-cyan-500/10 transition">
-                View All Projects on GitHub
+        <div class="container work-foot">
+          <span class="label">Scroll to explore</span>
+          <div class="work-progress" aria-hidden="true"><i id="workProgress"></i></div>
+          <span class="label hint">06 — 06</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="label">(03) — Services</span>
+          <span class="label">What I can take off your plate</span>
+        </div>
+
+        <h2 class="services-title" data-reveal>What I can <em>build</em> for you.</h2>
+
+        <div class="services-list" data-reveal>
+          <a class="service" href="#contact" data-preview="web" data-cursor="open">
+            <span class="service-num">01</span>
+            <div class="service-main">
+              <h3>Web applications</h3>
+              <p>End-to-end builds: interface, state, API and deployment. Fast by default, accessible by design.</p>
+            </div>
+            <div class="service-tags"><span>Product</span><span>Frontend</span><span>Backend</span></div>
+            <span class="service-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </a>
+
+          <a class="service" href="#contact" data-preview="design" data-cursor="open">
+            <span class="service-num">02</span>
+            <div class="service-main">
+              <h3>Interface &amp; motion</h3>
+              <p>UI systems and interaction detail that make a product feel considered, not assembled.</p>
+            </div>
+            <div class="service-tags"><span>UI/UX</span><span>Design systems</span><span>Motion</span></div>
+            <span class="service-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </a>
+
+          <a class="service" href="#contact" data-preview="api" data-cursor="open">
+            <span class="service-num">03</span>
+            <div class="service-main">
+              <h3>APIs &amp; automation</h3>
+              <p>Python and Node services, integrations and scripts that remove the repetitive work for good.</p>
+            </div>
+            <div class="service-tags"><span>Python</span><span>Node.js</span><span>REST</span></div>
+            <span class="service-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </a>
+
+          <a class="service" href="#contact" data-preview="performance" data-cursor="open">
+            <span class="service-num">04</span>
+            <div class="service-main">
+              <h3>Performance &amp; polish</h3>
+              <p>Audits, Core Web Vitals, accessibility passes and the last 10% that changes everything.</p>
+            </div>
+            <div class="service-tags"><span>Audit</span><span>SEO</span><span>A11y</span></div>
+            <span class="service-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="service-preview" id="servicePreview" aria-hidden="true">
+        <div class="service-preview-panel" data-panel="web">
+          <svg viewBox="0 0 290 350" aria-hidden="true">
+            <rect width="290" height="350" fill="#12120F"/>
+            <rect x="30" y="58" width="230" height="172" rx="8" fill="#E9E5D9"/>
+            <path d="M30 66a8 8 0 0 1 8-8h214a8 8 0 0 1 8 8v20H30Z" fill="#12120F"/>
+            <circle cx="45" cy="72" r="3" fill="#C8F24F"/><circle cx="57" cy="72" r="3" fill="#6F6B5F"/><circle cx="69" cy="72" r="3" fill="#6F6B5F"/>
+            <rect x="46" y="104" width="82" height="10" rx="5" fill="#12120F"/>
+            <rect x="46" y="122" width="120" height="5" rx="2.5" fill="#B7B2A4"/>
+            <rect x="46" y="134" width="98" height="5" rx="2.5" fill="#B7B2A4"/>
+            <rect x="46" y="158" width="58" height="22" rx="11" fill="#C8F24F"/>
+            <rect x="176" y="104" width="66" height="94" rx="6" fill="#12120F"/>
+            <path d="M190 182l12-24 10 13 8-9 16 20" stroke="#C8F24F" stroke-width="2" fill="none"/>
+            <text x="30" y="286" fill="#F2EFE6" font-family="'Space Grotesk', sans-serif" font-size="36" font-weight="500" letter-spacing="-1.6">WEB</text>
+            <text x="30" y="310" fill="#C8F24F" font-family="'JetBrains Mono', monospace" font-size="8" letter-spacing="1.5">PRODUCT / FRONTEND / API</text>
+            <text x="260" y="310" fill="#6F6B5F" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="8">01</text>
+          </svg>
+        </div>
+        <div class="service-preview-panel" data-panel="design">
+          <svg viewBox="0 0 290 350" aria-hidden="true">
+            <rect width="290" height="350" fill="#E9E5D9"/>
+            <circle cx="210" cy="88" r="58" fill="none" stroke="#12120F" stroke-width="1"/>
+            <circle cx="210" cy="88" r="38" fill="#C8F24F"/>
+            <text x="30" y="196" fill="#12120F" font-family="'Instrument Serif', serif" font-style="italic" font-size="132">Aa</text>
+            <rect x="30" y="226" width="230" height="1" fill="#12120F" opacity="0.3"/>
+            <rect x="30" y="240" width="92" height="6" rx="3" fill="#12120F"/>
+            <rect x="30" y="254" width="146" height="6" rx="3" fill="#12120F" opacity="0.4"/>
+            <text x="30" y="310" fill="#12120F" font-family="'JetBrains Mono', monospace" font-size="8" letter-spacing="1.5">TYPE / SYSTEM / MOTION</text>
+            <text x="260" y="310" fill="#12120F" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="8">02</text>
+          </svg>
+        </div>
+        <div class="service-preview-panel" data-panel="api">
+          <svg viewBox="0 0 290 350" aria-hidden="true">
+            <rect width="290" height="350" fill="#12120F"/>
+            <g stroke="#3A3A33" stroke-width="1">
+              <path d="M70 110 L210 110 L210 190 L120 190 L120 256"/>
+              <path d="M70 110 L70 256 L120 256"/>
+              <path d="M210 110 L210 70"/>
+            </g>
+            <g fill="#12120F" stroke="#C8F24F" stroke-width="1.5">
+              <circle cx="70" cy="110" r="16"/>
+              <circle cx="210" cy="110" r="16"/>
+              <circle cx="120" cy="256" r="16"/>
+            </g>
+            <circle cx="145" cy="190" r="34" fill="#C8F24F"/>
+            <path d="M133 190h24M145 178v24" stroke="#12120F" stroke-width="2"/>
+            <circle cx="70" cy="110" r="4" fill="#C8F24F"/>
+            <circle cx="210" cy="110" r="4" fill="#C8F24F"/>
+            <circle cx="120" cy="256" r="4" fill="#C8F24F"/>
+            <text x="30" y="310" fill="#F2EFE6" font-family="'JetBrains Mono', monospace" font-size="8" letter-spacing="1.5">PYTHON / NODE / REST</text>
+            <text x="260" y="310" fill="#6F6B5F" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="8">03</text>
+          </svg>
+        </div>
+        <div class="service-preview-panel" data-panel="performance">
+          <svg viewBox="0 0 290 350" aria-hidden="true">
+            <rect width="290" height="350" fill="#E9E5D9"/>
+            <path d="M55 220a90 90 0 0 1 180 0" fill="none" stroke="#12120F" stroke-width="1" opacity="0.25"/>
+            <path d="M55 220a90 90 0 0 1 145-75" fill="none" stroke="#12120F" stroke-width="10" stroke-linecap="round"/>
+            <path d="M55 220a90 90 0 0 1 40-61" fill="none" stroke="#C8F24F" stroke-width="10" stroke-linecap="round"/>
+            <text x="145" y="212" fill="#12120F" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="66" font-weight="500" letter-spacing="-3">99</text>
+            <text x="145" y="238" fill="#12120F" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" letter-spacing="1.5">PERFORMANCE</text>
+            <text x="30" y="300" fill="#12120F" font-family="'JetBrains Mono', monospace" font-size="8" letter-spacing="1.5">SPEED / A11Y / SEO</text>
+            <text x="260" y="300" fill="#12120F" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="8" opacity="0.5">04</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote -->
+    <section class="quote">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">(—) — A principle</span>
+          <span class="label">On building things</span>
+        </div>
+        <blockquote data-reveal>Simplicity is the <em>ultimate</em> sophistication.</blockquote>
+        <cite data-reveal>— Leonardo da Vinci</cite>
+      </div>
+      <span class="quote-mark" aria-hidden="true">✳</span>
+    </section>
+
+    <!-- Toolkit -->
+    <section class="toolkit" id="toolkit">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="label">(04) — Toolkit</span>
+          <span class="label">The short, honest list</span>
+        </div>
+        <h2 class="toolkit-title" data-reveal>Tools I <em>actually</em> use.</h2>
+
+        <div class="toolkit-grid">
+          <div class="toolkit-col" data-reveal>
+            <h3>Frontend <span>01</span></h3>
+            <ul>
+              <li>HTML5 <span>semantic</span></li>
+              <li>CSS3 <span>layout</span></li>
+              <li>JavaScript <span>vanilla</span></li>
+              <li>Tailwind CSS <span>utility</span></li>
+              <li>Responsive UI <span>mobile-first</span></li>
+            </ul>
+          </div>
+          <div class="toolkit-col" data-reveal>
+            <h3>Backend <span>02</span></h3>
+            <ul>
+              <li>Python <span>logic</span></li>
+              <li>Node.js <span>runtime</span></li>
+              <li>REST APIs <span>design</span></li>
+              <li>JSON <span>data</span></li>
+              <li>Automation <span>scripts</span></li>
+            </ul>
+          </div>
+          <div class="toolkit-col" data-reveal>
+            <h3>Tools &amp; design <span>03</span></h3>
+            <ul>
+              <li>Git <span>version</span></li>
+              <li>GitHub <span>ship</span></li>
+              <li>VS Code <span>daily</span></li>
+              <li>Figma <span>design</span></li>
+              <li>UI/UX <span>instinct</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="toolkit-marquee" aria-hidden="true">
+        <div class="toolkit-track">
+          <span>HTML <i>✳</i> CSS <i>✳</i> JavaScript <i>✳</i> Python <i>✳</i> Node <i>✳</i> Git <i>✳</i> Figma <i>✳</i></span>
+          <span>HTML <i>✳</i> CSS <i>✳</i> JavaScript <i>✳</i> Python <i>✳</i> Node <i>✳</i> Git <i>✳</i> Figma <i>✳</i></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">(05) — Contact</span>
+          <span class="label">Open for select projects</span>
+        </div>
+
+        <h2>Have an idea?<br>Let’s make it <em>real</em>.</h2>
+
+        <p class="contact-lead">Tell me what you’re building, what’s getting in the way, or just say hello. I read every message and reply like a human.</p>
+
+        <a class="contact-mail" href="mailto:hirushasandeeptha2006@gmail.com" data-magnetic>
+          hirushasandeeptha2006@gmail.com
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+
+        <div class="contact-lower">
+          <div class="contact-socials">
+            <a href="https://github.com/hirushasandeeptha" target="_blank" rel="noopener noreferrer">
+              <span class="social-name">GitHub</span>
+              <span class="social-meta">/hirushasandeeptha <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
             </a>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="text-center mb-20">
-            <h2 class="text-5xl font-bold mb-4">
-                <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                    Skills & Expertise
-                </span>
-            </h2>
-            <p class="text-gray-400 text-lg">Technologies and tools I work with</p>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="skill-card p-6 rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/10">
-                <h3 class="text-xl font-bold mb-4 text-cyan-400">Frontend</h3>
-                <ul class="space-y-2 text-gray-300">
-                    <li class="flex items-center skill-tag"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>HTML/CSS</li>
-                    <li class="flex items-center skill-tag"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>JavaScript</li>
-                    <li class="flex items-center skill-tag"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>Tailwind CSS</li>
-                </ul>
-            </div>
-
-            <div class="skill-card p-6 rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/10">
-                <h3 class="text-xl font-bold mb-4 text-blue-400">Backend</h3>
-                <ul class="space-y-2 text-gray-300">
-                    <li class="flex items-center skill-tag"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Python</li>
-                    <li class="flex items-center skill-tag"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Node.js</li>
-                    <li class="flex items-center skill-tag"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>REST APIs</li>
-                </ul>
-            </div>
-
-            <div class="skill-card p-6 rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/10">
-                <h3 class="text-xl font-bold mb-4 text-purple-400">Tools</h3>
-                <ul class="space-y-2 text-gray-300">
-                    <li class="flex items-center skill-tag"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>Git</li>
-                    <li class="flex items-center skill-tag"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>GitHub</li>
-                    <li class="flex items-center skill-tag"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>VS Code</li>
-                </ul>
-            </div>
-
-            <div class="skill-card p-6 rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/10">
-                <h3 class="text-xl font-bold mb-4 text-green-400">Design</h3>
-                <ul class="space-y-2 text-gray-300">
-                    <li class="flex items-center skill-tag"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>UI/UX Design</li>
-                    <li class="flex items-center skill-tag"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>Figma</li>
-                    <li class="flex items-center skill-tag"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>Animations</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Divider -->
-    <div class="section-divider max-w-7xl mx-auto"></div>
-
-    <!-- Stats Section -->
-    <section class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="text-center">
-                <div class="text-5xl font-bold mb-2">
-                    <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent counter" data-target="10">0</span>+
-                </div>
-                <p class="text-gray-400">Projects Completed</p>
-            </div>
-            <div class="text-center">
-                <div class="text-5xl font-bold mb-2">
-                    <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent counter" data-target="6">0</span>+
-                </div>
-                <p class="text-gray-400">Technologies</p>
-            </div>
-            <div class="text-center">
-                <div class="text-5xl font-bold mb-2">
-                    <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">100%</span>
-                </div>
-                <p class="text-gray-400">Dedication</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Divider -->
-    <div class="section-divider max-w-7xl mx-auto"></div>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 px-6 max-w-4xl mx-auto">
-        <div class="text-center mb-12">
-            <h2 class="text-5xl font-bold mb-4">
-                <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                    Let's Connect
-                </span>
-            </h2>
-            <p class="text-gray-400 text-lg">I'm always interested in hearing about new projects and opportunities</p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8 mb-12">
-            <a href="https://github.com/hirushasandeeptha" target="_blank" rel="noopener noreferrer" class="group p-6 rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/10">
-                <div class="mb-4 inline-block p-3 bg-cyan-500/20 rounded-lg group-hover:bg-cyan-500/30 transition">
-                    <svg class="w-6 h-6 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-bold mb-2">GitHub</h3>
-                <p class="text-gray-400 text-sm">View my projects and contributions</p>
+            <a href="https://www.linkedin.com/in/hirushasandeeptha/" target="_blank" rel="noopener noreferrer">
+              <span class="social-name">LinkedIn</span>
+              <span class="social-meta">Let’s connect <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
             </a>
-
-            <a href="mailto:hirushasandeeptha2006@gmail.com" class="group p-6 rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/10">
-                <div class="mb-4 inline-block p-3 bg-blue-500/20 rounded-lg group-hover:bg-blue-500/30 transition">
-                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-bold mb-2">Email</h3>
-                <p class="text-gray-400 text-sm">Send me a message</p>
+            <a href="mailto:hirushasandeeptha2006@gmail.com">
+              <span class="social-name">Email</span>
+              <span class="social-meta">Direct line <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
             </a>
+          </div>
 
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="group p-6 rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/10">
-                <div class="mb-4 inline-block p-3 bg-purple-500/20 rounded-lg group-hover:bg-purple-500/30 transition">
-                    <svg class="w-6 h-6 text-purple-400" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.731-2.004 1.438-.103.249-.129.597-.129.946v5.421h-3.554s.047-8.733 0-9.635h3.554v1.364c.429-.663 1.191-1.616 2.905-1.616 2.12 0 3.71 1.386 3.71 4.365v5.186zM9.539 9.235c-1.177 0-1.937-.788-1.937-1.775 0-.99.773-1.776 1.982-1.776 1.207 0 1.936.786 1.953 1.776 0 .987-.746 1.775-1.998 1.775zm-1.946 11.217h3.894v-9.635H7.593v9.635zM24 0H0v24h24V0z"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-bold mb-2">LinkedIn</h3>
-                <p class="text-gray-400 text-sm">Connect with me professionally</p>
-            </a>
+          <div class="contact-meta">
+            <div class="contact-meta-block">
+              <span class="meta-label">Local time</span>
+              <span class="meta-value"><span data-clock>--:--:--</span><small>Colombo · GMT +5:30</small></span>
+            </div>
+            <div class="contact-meta-block">
+              <span class="meta-label">Availability</span>
+              <span class="meta-value">Select projects<small>Booking late 2026 — 2027</small></span>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-8 px-6 border-t border-gray-800 mt-24">
-        <div class="max-w-7xl mx-auto text-center text-gray-500">
-            <p>© 2026 Hirusha Sandeeptha. Crafted with creativity and passion.</p>
-        </div>
-    </footer>
+  </main>
 
-    <script src="assets/JS/three-animation.js"></script>
-    <script src="assets/JS/main.js"></script>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© 2026 Hirusha Sandeeptha</span>
+      <span class="footer-mid">
+        <span>Designed &amp; built in Colombo</span>
+        <span class="footer-dot" aria-hidden="true"></span>
+        <span>GSAP + Lenis</span>
+      </span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- Project modal -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel" id="modalPanel">
+      <button class="modal-close" type="button" data-close aria-label="Close project details">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div class="modal-art" id="modalArt" aria-hidden="true"></div>
+      <div class="modal-content">
+        <span class="label" id="modalIndex">Project</span>
+        <h2 id="modalTitle">Project</h2>
+        <p class="modal-summary" id="modalSummary"></p>
+        <dl class="modal-facts">
+          <div><dt>Year</dt><dd id="modalYear">—</dd></div>
+          <div><dt>Role</dt><dd id="modalRole">—</dd></div>
+          <div><dt>Type</dt><dd id="modalType">—</dd></div>
+        </dl>
+        <ul class="modal-highlights" id="modalHighlights"></ul>
+        <div class="modal-cta">
+          <a class="btn btn-primary" id="modalGithubBtn" href="https://github.com/hirushasandeeptha" target="_blank" rel="noopener noreferrer">
+            View GitHub
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="mailto:hirushasandeeptha2006@gmail.com?subject=Project%20enquiry">
+            Start a project
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/vendor/gsap.min.js"></script>
+  <script src="assets/js/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/js/vendor/lenis.min.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    // Last-resort safety: if the enhancement layer fails to load, never trap the page.
+    window.setTimeout(function () {
+      var loader = document.getElementById('preloader');
+      if (loader && loader.style.display !== 'none') {
+        loader.style.display = 'none';
+        document.body.classList.remove('is-locked');
+      }
+    }, 4500);
+  </script>
 </body>
 </html>
