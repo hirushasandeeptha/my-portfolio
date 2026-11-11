@@ -21,6 +21,134 @@
   var modalOpen = false;
   var lastFocused = null;
 
+  var walkingMascot = $('#walkingMascot');
+  if (walkingMascot) {
+    var hideMascot = $('button', walkingMascot);
+    var mascotSprite = $('.walking-mascot-sprite', walkingMascot);
+    var mascotLaptop = $('.walking-mascot-laptop', walkingMascot);
+    var mascotCommand = $('.walking-mascot-command', walkingMascot);
+    var mascotReply = $('.walking-mascot-success', walkingMascot);
+    var mascotDialogs = [
+      ['npm run build', '✓ Build complete'],
+      ['npm test', '✓ All tests passed'],
+      ['git diff --check', '✓ Clean diff'],
+      ['npm run lint', '✓ No lint errors'],
+      ['git status --short', '✓ Working tree clean']
+    ];
+    var mascotDialogIndex = 0;
+    var mascotMotion = window.matchMedia('(prefers-reduced-motion: no-preference)');
+    var mascotPointer = null;
+    var mascotFrame = 0;
+    var mascotRate = 1;
+    var mascotRadius = 120;
+    var mascotBreakTimer;
+    var mascotResumeTimer;
+    var mascotScrollPosition = window.scrollY;
+
+    function finishMascotBreak() {
+      clearTimeout(mascotResumeTimer);
+      walkingMascot.classList.remove('is-coding');
+    }
+
+    function takeMascotBreak() {
+      clearTimeout(mascotBreakTimer);
+      mascotBreakTimer = null;
+      if (walkingMascot.hidden) return;
+      if (mascotMotion.matches && !document.hidden && !menuOpen && !modalOpen &&
+          mascotLaptop.complete && mascotLaptop.naturalWidth &&
+          !walkingMascot.matches('[open], :has(:focus-visible)')) {
+        var dialog = mascotDialogs[mascotDialogIndex];
+        mascotCommand.textContent = '> ' + dialog[0];
+        mascotCommand.style.setProperty('--mascot-command-length', mascotCommand.textContent.length);
+        mascotReply.textContent = dialog[1];
+        mascotDialogIndex = (mascotDialogIndex + 1) % mascotDialogs.length;
+        walkingMascot.classList.add('is-coding');
+        mascotResumeTimer = setTimeout(finishMascotBreak, 3100);
+      }
+    }
+
+    var reactToMascotScroll = function (scroller) {
+      if (walkingMascot.hidden || !mascotMotion.matches || body.classList.contains('is-locked')) return;
+      var position = window.scrollY;
+      var moved = position !== mascotScrollPosition;
+      mascotScrollPosition = position;
+
+      if (scroller && scroller.isScrolling === false && mascotBreakTimer != null) {
+        takeMascotBreak();
+        return;
+      }
+      if (!moved) return;
+      if (walkingMascot.classList.contains('is-coding')) finishMascotBreak();
+      clearTimeout(mascotBreakTimer);
+      // Lenis reports the end of smooth scrolling. Native scroll uses a short quiet period.
+      var delay = scroller && scroller.isScrolling === 'smooth' ? 240 : 120;
+      mascotBreakTimer = setTimeout(takeMascotBreak, delay);
+    };
+
+    window.addEventListener('scroll', function () {
+      if (!lenis) reactToMascotScroll();
+    }, { passive: true });
+    walkingMascot.addEventListener('focusin', finishMascotBreak);
+    walkingMascot.addEventListener('toggle', finishMascotBreak);
+    mascotMotion.addEventListener('change', finishMascotBreak);
+
+    function updateMascotPace() {
+      mascotFrame = 0;
+      if (walkingMascot.hidden || !mascotMotion.matches) return;
+
+      var targetRate = 1;
+      if (mascotPointer) {
+        var bounds = walkingMascot.getBoundingClientRect();
+        var dx = Math.max(bounds.left - mascotPointer.x, mascotPointer.x - bounds.right, 0);
+        var dy = Math.max(bounds.top - mascotPointer.y, mascotPointer.y - bounds.bottom, 0);
+        var distance = Math.hypot(dx, dy);
+        targetRate = 0.25 + 0.75 * Math.min(distance / mascotRadius, 1);
+      }
+
+      var difference = targetRate - mascotRate;
+      var nextRate = Math.abs(difference) < 0.01 ? targetRate : mascotRate + difference * 0.16;
+      if (nextRate !== mascotRate) {
+        mascotRate = nextRate;
+        // Keep the walk, turnaround and footstep animations on the same clock.
+        walkingMascot.getAnimations().concat(mascotSprite.getAnimations()).forEach(function (animation) {
+          animation.updatePlaybackRate(mascotRate);
+        });
+      }
+
+      if (mascotPointer || mascotRate !== 1) {
+        mascotFrame = requestAnimationFrame(updateMascotPace);
+      }
+    }
+
+    if (walkingMascot.getAnimations && window.Animation && Animation.prototype.updatePlaybackRate) {
+      window.addEventListener('pointermove', function (event) {
+        if (event.pointerType !== 'mouse' || walkingMascot.hidden || !mascotMotion.matches) return;
+        // Only track the pointer near the bottom, where the mascot can pass it.
+        var bottomBand = walkingMascot.offsetHeight + mascotRadius + 14;
+        mascotPointer = window.innerHeight - event.clientY <= bottomBand
+          ? { x: event.clientX, y: event.clientY }
+          : null;
+        if (!mascotFrame && (mascotPointer || mascotRate !== 1)) {
+          mascotFrame = requestAnimationFrame(updateMascotPace);
+        }
+      }, { passive: true });
+      html.addEventListener('pointerleave', function () { mascotPointer = null; });
+      window.addEventListener('blur', function () { mascotPointer = null; });
+      mascotMotion.addEventListener('change', function () {
+        mascotPointer = null;
+        mascotRate = 1;
+      });
+    }
+
+    hideMascot.hidden = false;
+    hideMascot.addEventListener('click', function () {
+      walkingMascot.hidden = true;
+      cancelAnimationFrame(mascotFrame);
+      clearTimeout(mascotBreakTimer);
+      finishMascotBreak();
+    });
+  }
+
   if (hasMotion) {
     gsap.registerPlugin(ScrollTrigger);
     ScrollTrigger.config({ ignoreMobileResize: true });
@@ -94,6 +222,7 @@
         smoothWheel: true
       });
       lenis.on('scroll', ScrollTrigger.update);
+      if (walkingMascot) lenis.on('scroll', reactToMascotScroll);
       gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
       gsap.ticker.lagSmoothing(0);
       lenis.stop();
